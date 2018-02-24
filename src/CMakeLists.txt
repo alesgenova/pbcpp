@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
-project(pbcpp)
+project(PBCPP)
 
 if (MSVC)
     add_compile_options(/W4)
@@ -13,12 +13,5 @@ endif()
 
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
-add_executable(
-    sample
-    main.cpp
-    constants/Constants.hpp
-    constants/Constants.cpp
-    base/Cell.hpp
-    base/Cell.cpp
-)
-target_link_libraries (sample Eigen3::Eigen)
+add_subdirectory(pbcpp)
+add_subdirectory(tests)
