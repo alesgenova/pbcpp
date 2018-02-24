@@ -16,7 +16,7 @@ find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 add_executable(
     sample
     main.cpp
-    base.h
-    base.cpp
+    base/Cell.hpp
+    base/Cell.cpp
 )
 target_link_libraries (sample Eigen3::Eigen)
