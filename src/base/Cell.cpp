@@ -2,15 +2,12 @@
 #include <Eigen/Dense>
 
 #include "Cell.hpp"
+#include "../constants/Constants.hpp"
 
+// BaseCell implementation
 
 BaseCell::BaseCell()
 {
-  /*
-  lattice <<  1., 0., 0.,
-              0., 1., 0.,
-              0., 0., 1.;
-  */
   lattice = Eigen::Matrix3d::Identity();
   volume = 1.0;
 }
@@ -41,4 +38,32 @@ bool BaseCell::isEqual(const BaseCell & other) const{
     }
   }
   return true;
+}
+
+
+// DirectCell implementation
+
+DirectCell::DirectCell() : BaseCell() {}
+
+DirectCell::DirectCell(Eigen::Matrix3d t_lattice) : BaseCell(t_lattice) {}
+
+
+ReciprocalCell DirectCell::getReciprocal() const{
+  Eigen::Matrix3d bg;
+  bg = TWOPI*lattice.inverse();
+  bg.transposeInPlace();
+  return ReciprocalCell(bg);
+}
+
+
+// ReciprocalCell implementation
+
+ReciprocalCell::ReciprocalCell() : BaseCell() {}
+
+ReciprocalCell::ReciprocalCell(Eigen::Matrix3d t_lattice) : BaseCell(t_lattice) {}
+
+DirectCell ReciprocalCell::getDirect() const{
+  Eigen::Matrix3d at;
+  at = TWOPI*lattice.inverse();
+  return DirectCell(at);
 }

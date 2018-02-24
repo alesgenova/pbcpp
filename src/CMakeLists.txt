@@ -16,6 +16,8 @@ find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 add_executable(
     sample
     main.cpp
+    constants/Constants.hpp
+    constants/Constants.cpp
     base/Cell.hpp
     base/Cell.cpp
 )
