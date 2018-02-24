@@ -2,8 +2,12 @@ add_library(
     pbcpp
     constants/Constants.hpp
     constants/Constants.cpp
-    base/Cell.hpp
-    base/Cell.cpp
+    base/BaseCell.hpp
+    base/BaseCell.cpp
+    base/DirectCell.hpp
+    base/DirectCell.cpp
+    base/ReciprocalCell.hpp
+    base/ReciprocalCell.cpp
 )
 
 target_include_directories (pbcpp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -1,7 +1,8 @@
 #include <iostream>
 
 #include <Eigen/Core>
-#include "base/Cell.hpp"
+#include "base/DirectCell.hpp"
+#include "base/ReciprocalCell.hpp"
 #include "constants/Constants.hpp"
 
 
