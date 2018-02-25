@@ -17,12 +17,12 @@ class BaseCell{
     // returns the lattice of the cell
     Eigen::Matrix3d getLattice() const;
     // compare the cell to another and determine if they are equivalent
-    bool isEqual(const BaseCell & other) const;
     
   protected:
     // the lattice vectors
-    //std::vector< std::vector<double> > lattice;
     Eigen::Matrix3d lattice;
+    // isEqual helper function, invoked by the derived classes when overloading ==
+    bool isEqual(const BaseCell& other) const;
     // the volume
     double volume;
 

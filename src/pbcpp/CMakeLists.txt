@@ -8,6 +8,8 @@ add_library(
     base/DirectCell.cpp
     base/ReciprocalCell.hpp
     base/ReciprocalCell.cpp
+    base/Coord.hpp
+    base/Coord.cpp
 )
 
 target_include_directories (pbcpp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

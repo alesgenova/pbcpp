@@ -37,7 +37,8 @@
                 "${workspaceRoot}",
                 "/usr/include/eigen3",
                 "${workspaceRoot}/src",
-                "${workspaceRoot}/src/pbcpp"
+                "${workspaceRoot}/src/pbcpp",
+                "${workspaceRoot}/src/tests"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",

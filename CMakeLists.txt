@@ -13,5 +13,5 @@ endif()
 
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
-add_subdirectory(pbcpp)
+add_subdirectory(src/pbcpp)
 add_subdirectory(tests)
