@@ -15,7 +15,7 @@ build:
     - make
   artifacts:
     paths:
-      - build/src/pbcpp/libpbcpp.a
+      - build/src/pbcpp/libpbcpp.so
       - build/tests/unittests
 
   # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
