@@ -9,21 +9,31 @@ build-debug:
   stage: build
   before_script: 
     - apt update && apt -y install cmake libeigen3-dev
-  script: 
+  script:
     - mkdir build
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=Debug
-    - make VERBOSE=1
+    - make #VERBOSE=1
   cache:
-    key: build-cache
+    key: build-debug-cache
     #untracked: true
     paths:
       - build/
     policy: push
-  #artifacts:
-  #  paths:
-  #    - build/src/pbcpp/libpbcpp.so
-  #    - build/tests/unittests
+
+
+build-release:
+  stage: build
+  before_script: 
+    - apt update && apt -y install cmake libeigen3-dev
+  script:
+    - mkdir build
+    - cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - make pbcpp #VERBOSE=1
+  artifacts:
+   paths:
+     - build/src/pbcpp/libpbcpp.so
 
 
 # run tests using the binary built before
@@ -32,17 +42,17 @@ test:
   dependencies: 
     - build-debug
   cache:
-    key: build-cache
+    key: build-debug-cache
     #untracked: true
     paths:
       - build/
-    policy: pull-push
+    policy: pull
   before_script: 
-    - apt update && apt -y install tree lcov
+    - apt update && apt -y install lcov libeigen3-dev
   script:
-    - tree build/
     - cd build
     - tests/unittests
     - lcov --capture --directory src/pbcpp/CMakeFiles/pbcpp.dir/ --output-file coverage_all.info
     - lcov --extract coverage_all.info "*/src/pbcpp/*" --output-file coverage_pbcpp.info
+    #- genhtml coverage_pbcpp.info --output-directory out
   coverage: '/lines......:\s*(\d+.\d+\%)/'
