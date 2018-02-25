@@ -14,17 +14,17 @@ class Coord{
     DirectCell getCell() const;
     char getBasis() const;
     // returns a coordinate in Cartesian basis
-    Coord toCart();
+    Coord toCart() const;
     // returns a coordinate in Crystal basis
-    Coord toCrys();
+    Coord toCrys() const;
     // convert the coordinate to Cartesian|Crystal basis
-    Coord toBasis(char basis);
+    Coord toBasis(char basis) const;
     // find the shortest vector connecting two coordinates using the Minimum Image Convention
-    Coord d_MIC(Coord other);
+    Coord d_MIC(const Coord &other) const;
     // find the distance of two coordinates using the Minimum Image Convention (i.e. the length of d_MIC)
-    double dd_MIC(Coord other);
+    double dd_MIC(const Coord &other) const;
     // calculate the length of the pos vector
-    double length();
+    double length() const;
     
   private:
 
