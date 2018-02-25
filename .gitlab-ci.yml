@@ -7,16 +7,16 @@ stages:
 build-debug:
   stage: build
   before_script: 
-    - apt update && apt -y install cmake libeigen3-dev
+    - apt update && apt -y install cmake libeigen3-dev tree lcov
   script: 
     - mkdir build
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=Debug
     - make VERBOSE=1
-  artifacts:
-    paths:
-      - build/src/pbcpp/libpbcpp.so
-      - build/tests/unittests
+  #artifacts:
+  #  paths:
+  #    - build/src/pbcpp/libpbcpp.so
+  #    - build/tests/unittests
 
   # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
   # cache:
@@ -32,5 +32,9 @@ test:
   dependencies: 
     - build-debug
   script:
-    - ls
-    - build/tests/unittests
+    - tree build/
+    - cd build
+    - tests/unittests
+    - lcov --capture --directory src/pbcpp/CMakeFiles/pbcpp.dir/ --output-file coverage_all.info
+    - lcov --extract coverage_all.info "*/src/pbcpp/*" --output-file coverage_pbcpp.info
+  coverage: "/^\s*lines......:\s*(\d+).\d+\%.*$/"
