@@ -37,4 +37,4 @@ test:
     - tests/unittests
     - lcov --capture --directory src/pbcpp/CMakeFiles/pbcpp.dir/ --output-file coverage_all.info
     - lcov --extract coverage_all.info "*/src/pbcpp/*" --output-file coverage_pbcpp.info
-  coverage: "/^\s*lines......:\s*(\d+).\d+\%.*$/"
+  coverage: '/lines......:\s*(\d+.\d+\%)/'
