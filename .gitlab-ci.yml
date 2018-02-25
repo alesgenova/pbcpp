@@ -13,9 +13,11 @@ build:
     - cd build
     - cmake ..
     - make
-  # artifacts:
-  #   paths:
-  #     - mybinary
+  artifacts:
+    paths:
+      - build/src/pbcpp/libpbcpp.a
+      - build/tests/unittests
+
   # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
   # cache:
   #   paths:
@@ -24,8 +26,11 @@ build:
 # run tests using the binary built before
 test:
   stage: test
-  cache:
-    paths:
-    - build/
+  #cache:
+  #  paths:
+  #  - build/
+  dependencies: 
+    - build
   script:
+    - ls
     - build/tests/unittests
