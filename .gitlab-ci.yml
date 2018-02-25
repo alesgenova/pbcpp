@@ -13,6 +13,10 @@ build-debug:
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=Debug
     - make VERBOSE=1
+  cache:
+    untracked: true
+    paths:
+    - build/
   #artifacts:
   #  paths:
   #    - build/src/pbcpp/libpbcpp.so
