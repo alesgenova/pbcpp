@@ -7,7 +7,7 @@ stages:
 build-debug:
   stage: build
   before_script: 
-    - apt update && apt -y install cmake libeigen3-dev tree lcov
+    - apt update && apt -y install cmake libeigen3-dev
   script: 
     - mkdir build
     - cd build
@@ -31,6 +31,8 @@ test:
   #  - build/
   dependencies: 
     - build-debug
+  before_script: 
+    - apt update && apt -y install tree lcov
   script:
     - tree build/
     - cd build
