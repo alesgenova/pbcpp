@@ -4,10 +4,6 @@ stages:
   - build
   - test
 
-cache:
-  untracked: true
-  paths:
-    - build/
 
 build-debug:
   stage: build
@@ -18,6 +14,11 @@ build-debug:
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=Debug
     - make VERBOSE=1
+  cache:
+    untracked: true
+    paths:
+      - build/
+    policy: push
   #artifacts:
   #  paths:
   #    - build/src/pbcpp/libpbcpp.so
@@ -29,6 +30,11 @@ test:
   stage: test
   dependencies: 
     - build-debug
+  cache:
+    untracked: true
+    paths:
+      - build/
+    policy: pull-push
   before_script: 
     - apt update && apt -y install tree lcov
   script:
