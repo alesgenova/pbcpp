@@ -4,15 +4,15 @@ stages:
   - build
   - test
 
-build:
+build-debug:
   stage: build
   before_script: 
     - apt update && apt -y install cmake libeigen3-dev
   script: 
     - mkdir build
     - cd build
-    - cmake ..
-    - make
+    - cmake .. -DCMAKE_BUILD_TYPE=Debug
+    - make VERBOSE=1
   artifacts:
     paths:
       - build/src/pbcpp/libpbcpp.so
@@ -30,7 +30,7 @@ test:
   #  paths:
   #  - build/
   dependencies: 
-    - build
+    - build-debug
   script:
     - ls
     - build/tests/unittests
