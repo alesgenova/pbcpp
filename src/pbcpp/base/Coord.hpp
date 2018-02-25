@@ -13,6 +13,9 @@ class Coord{
     Eigen::Vector3d getPos() const;
     DirectCell getCell() const;
     char getBasis() const;
+    //
+    bool operator==(const Coord & other) const;
+    bool operator!=(const Coord & other) const;
     // returns a coordinate in Cartesian basis
     Coord toCart() const;
     // returns a coordinate in Crystal basis
@@ -24,7 +27,7 @@ class Coord{
     // find the distance of two coordinates using the Minimum Image Convention (i.e. the length of d_MIC)
     double dd_MIC(const Coord &other) const;
     // calculate the length of the pos vector
-    double length() const;
+    //double length() const;
     
   private:
 

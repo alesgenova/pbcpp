@@ -1,7 +1,9 @@
 #include <Eigen/Core>
+#include <cmath>
 
 #include "Coord.hpp"
 #include "DirectCell.hpp"
+#include "utils/Utils.hpp"
 
 
 Coord::Coord(Eigen::Vector3d t_pos, DirectCell t_cell, char t_basis)
@@ -21,6 +23,19 @@ DirectCell Coord::getCell() const{
 
 char Coord::getBasis() const{
   return basis;
+}
+
+bool Coord::operator==(const Coord & other) const{
+  if (cell != other.getCell()){
+    // if two coordinates are represented on different cells they are not equal
+    return false;
+  }
+  // if their distance using MIC is 0, then they are the same coordinate
+  return almostEqual(dd_MIC(other), 0.0, 1.e-6);
+}
+
+bool Coord::operator!=(const Coord & other) const{
+  return !(*this==other);
 }
 
 Coord Coord::toCart() const{
@@ -59,9 +74,21 @@ Coord Coord::toBasis(char basis) const{
 
 
 Coord Coord::d_MIC(const Coord &other) const{
-    return Coord();
+  if (cell != other.getCell()){
+    throw std::invalid_argument( "The Cell of the two coordinates is not the same" );
+  }
+  Eigen::Vector3d d12s;
+  d12s = other.toCrys().getPos() - toCrys().getPos();
+  for (int i=0; i<3; i++){
+    d12s[i] = d12s[i] - round(d12s[i]);
+  }
+  return Coord(d12s, cell, 's').toBasis(basis);
 }
 
 double Coord::dd_MIC(const Coord &other) const{
-    return 0.;
+    Coord tmp;
+    tmp = d_MIC(other).toCart();
+    double d;
+    d = tmp.getPos().dot(tmp.getPos());
+    return sqrt(d);
 }

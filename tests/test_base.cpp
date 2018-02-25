@@ -2,6 +2,7 @@
 #include <Eigen/Core>
 
 #include "catch.hpp"
+#include "utils/Utils.hpp"
 #include "base/DirectCell.hpp"
 #include "base/ReciprocalCell.hpp"
 #include "base/Coord.hpp"
@@ -72,6 +73,7 @@ TEST_CASE( "Basic Coord Tests" ) {
     std::cout << coord0.getPos() << std::endl;
     std::cout << coord0.getCell().getLattice() << std::endl;
     std::cout << coord0.getBasis() << std::endl;
+
     
     for (int i = 0; i < n; i++){
 
