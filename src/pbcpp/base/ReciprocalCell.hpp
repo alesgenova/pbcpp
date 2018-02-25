@@ -16,6 +16,9 @@ class ReciprocalCell : public BaseCell {
     ReciprocalCell(Eigen::Matrix3d lattice);
     // Returns the DirectCell of a ReciprocalCell
     DirectCell getDirect() const;
+    // compare operators
+    bool operator==(const ReciprocalCell & other) const;
+    bool operator!=(const ReciprocalCell & other) const;
 
 };
 
