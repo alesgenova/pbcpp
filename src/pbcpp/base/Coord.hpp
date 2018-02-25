@@ -8,9 +8,11 @@ class Coord{
 
   public:
     // constructor
-    Coord(Eigen::Vector3d pos);
-    Coord(Eigen::Vector3d pos, DirectCell cell);
-    Coord(Eigen::Vector3d pos, DirectCell cell, char basis);
+    Coord(Eigen::Vector3d pos=Eigen::Vector3d::Zero(), DirectCell cell=DirectCell(), char basis='r');
+    // getters
+    Eigen::Vector3d getPos() const;
+    DirectCell getCell() const;
+    char getBasis() const;
     // returns a coordinate in Cartesian basis
     Coord toCart();
     // returns a coordinate in Crystal basis
@@ -25,11 +27,10 @@ class Coord{
     double length();
     
   private:
-    // the lattice vectors
-    //std::vector< std::vector<double> > lattice;
+
     Eigen::Vector3d pos;
-    char basis;
     DirectCell cell;
+    char basis;
 
 };
 

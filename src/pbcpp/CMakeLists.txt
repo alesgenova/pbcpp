@@ -1,5 +1,8 @@
+
+
 add_library(
     pbcpp
+    SHARED
     constants/Constants.hpp
     constants/Constants.cpp
     base/BaseCell.hpp

@@ -4,6 +4,7 @@
 #include "catch.hpp"
 #include "base/DirectCell.hpp"
 #include "base/ReciprocalCell.hpp"
+#include "base/Coord.hpp"
 #include "constants/Constants.hpp"
 
 #include "utils.hpp"
@@ -57,5 +58,22 @@ TEST_CASE( "DirectCell ReciprocalCell conversion Tests" ) {
         REQUIRE( cell0 == cell1 );
         REQUIRE( almostEqual(reciprocal1.getVolume(), (TWOPI*TWOPI*TWOPI)/(a*b*c) ) );
         REQUIRE( reciprocal0 == reciprocal1 );
+    }
+}
+
+TEST_CASE( "Basic Coord Tests" ) {
+    const int n = 100;
+    double a, b, c;
+    DirectCell cell0 = getOrthoDirectCell(2,3,3);
+    Eigen::Vector3d pos0;
+    pos0 << 2., 1., 1.;
+    Coord coord0;
+    coord0 = Coord(pos0, cell0, 's');
+    std::cout << coord0.getPos() << std::endl;
+    std::cout << coord0.getCell().getLattice() << std::endl;
+    std::cout << coord0.getBasis() << std::endl;
+    
+    for (int i = 0; i < n; i++){
+
     }
 }
