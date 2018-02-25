@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Eigen/Core>
+#include <cmath>
 
 #include "catch.hpp"
 #include "utils/Utils.hpp"
@@ -62,20 +63,39 @@ TEST_CASE( "DirectCell ReciprocalCell conversion Tests" ) {
     }
 }
 
-TEST_CASE( "Basic Coord Tests" ) {
+TEST_CASE( "Coord Tests" ) {
     const int n = 100;
     double a, b, c;
-    DirectCell cell0 = getOrthoDirectCell(2,3,3);
+    DirectCell cell0;
     Eigen::Vector3d pos0;
-    pos0 << 2., 1., 1.;
-    Coord coord0;
-    coord0 = Coord(pos0, cell0, 's');
-    std::cout << coord0.getPos() << std::endl;
-    std::cout << coord0.getCell().getLattice() << std::endl;
-    std::cout << coord0.getBasis() << std::endl;
-
+    Coord rcoord0, rcoord1, scoord0, scoord1;
     
     for (int i = 0; i < n; i++){
+        a = randomBetween(0.1, 100.); b = randomBetween(0.1, 100.); c = randomBetween(0.1, 100.);
+        cell0 = getOrthoDirectCell(a, b, c);
+        pos0 << randomBetween(-100, 100.),
+                randomBetween(-100, 100.),
+                randomBetween(-100, 100.);
+        // rcoord is a cartesian coordinate
+        rcoord0 = Coord(pos0, cell0, 'r');
+        // scoord0 is rcoord0 in crystal basis
+        scoord0 = rcoord0.toCrys();
+        // rcoord1 is scoord0 in cartesian basis (i.e. back to rcoord0)
+        rcoord1 = scoord0.toCart();
+        // adding integer values to a crystal coordinate is equivalent to a translation by a lattice vector
+        // so scoord1 is still technically equivalent to scoord0
+        pos0 << floor(randomBetween(-100, 100.)),
+                floor(randomBetween(-100, 100.)),
+                floor(randomBetween(-100, 100.));
+        scoord1 = Coord(scoord0.getPos()+pos0, cell0, 's');
 
+        REQUIRE( almostEqual(rcoord0.dd_MIC(scoord0), 0.) );
+        REQUIRE( rcoord0 == scoord0 );
+        REQUIRE( almostEqual(rcoord0.dd_MIC(scoord1), 0.) );
+        REQUIRE( rcoord0 == scoord1 );
+        REQUIRE( almostEqual(rcoord0.dd_MIC(rcoord1), 0.) );
+        REQUIRE( rcoord0 == rcoord1 );
+        REQUIRE( almostEqual(scoord0.dd_MIC(scoord1), 0.) );
+        REQUIRE( scoord0 == scoord1 );
     }
 }
