@@ -15,7 +15,8 @@ build-debug:
     - cmake .. -DCMAKE_BUILD_TYPE=Debug
     - make VERBOSE=1
   cache:
-    untracked: true
+    key: build-cache
+    #untracked: true
     paths:
       - build/
     policy: push
@@ -31,7 +32,8 @@ test:
   dependencies: 
     - build-debug
   cache:
-    untracked: true
+    key: build-cache
+    #untracked: true
     paths:
       - build/
     policy: pull-push
