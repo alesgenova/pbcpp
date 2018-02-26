@@ -13,7 +13,7 @@ build-debug:
     - mkdir build
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=Debug
-    - make #VERBOSE=1
+    - make all #VERBOSE=1
   # looks like there is a problem using cache when the two stages
   # run on different shared runners.
   # let's use a short-live artifact as a workaround.
