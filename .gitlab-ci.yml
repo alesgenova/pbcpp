@@ -14,12 +14,18 @@ build-debug:
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=Debug
     - make #VERBOSE=1
-  cache:
-    key: build-debug-cache
-    #untracked: true
+  # looks like there is a problem using cache when the two stages
+  # run on different shared runners.
+  # let's use a short-live artifact as a workaround.
+  artifacts:
     paths:
       - build/
-    policy: push
+    expire_in: 30 minutes
+  # cache:
+  #   key: build-debug-cache
+  #   paths:
+  #     - build/
+  #   policy: push
 
 
 build-release:
@@ -41,12 +47,11 @@ test:
   stage: test
   dependencies: 
     - build-debug
-  cache:
-    key: build-debug-cache
-    #untracked: true
-    paths:
-      - build/
-    policy: pull
+  # cache:
+  #   key: build-debug-cache
+  #   paths:
+  #     - build/
+  #   policy: pull
   before_script: 
     - apt update && apt -y install lcov libeigen3-dev
   script:
