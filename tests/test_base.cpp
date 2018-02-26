@@ -58,12 +58,14 @@ TEST_CASE( "DirectCell ReciprocalCell conversion Tests" ) {
         REQUIRE( almostEqual(cell0.getVolume(), a*b*c ) );
         REQUIRE( almostEqual(cell1.getVolume(), a*b*c ) );
         REQUIRE( cell0 == cell1 );
+        REQUIRE( !(cell0 != cell1) );
         REQUIRE( almostEqual(reciprocal1.getVolume(), (TWOPI*TWOPI*TWOPI)/(a*b*c) ) );
         REQUIRE( reciprocal0 == reciprocal1 );
+        REQUIRE( !(reciprocal0 != reciprocal1) );
     }
 }
 
-TEST_CASE( "Coord Tests" ) {
+TEST_CASE( "Coord Basic Tests" ) {
     const int n = 100;
     double a, b, c;
     DirectCell cell0;
@@ -81,7 +83,7 @@ TEST_CASE( "Coord Tests" ) {
         // scoord0 is rcoord0 in crystal basis
         scoord0 = rcoord0.toCrys();
         // rcoord1 is scoord0 in cartesian basis (i.e. back to rcoord0)
-        rcoord1 = scoord0.toCart();
+        rcoord1 = scoord0.toBasis('r'); // equivalent to scoord0.toCart()
         // adding integer values to a crystal coordinate is equivalent to a translation by a lattice vector
         // so scoord1 is still technically equivalent to scoord0
         pos0 << floor(randomBetween(-100, 100.)),
@@ -91,11 +93,14 @@ TEST_CASE( "Coord Tests" ) {
 
         REQUIRE( almostEqual(rcoord0.dd_MIC(scoord0), 0.) );
         REQUIRE( rcoord0 == scoord0 );
+        REQUIRE( !(rcoord0 != scoord0) );
         REQUIRE( almostEqual(rcoord0.dd_MIC(scoord1), 0.) );
         REQUIRE( rcoord0 == scoord1 );
         REQUIRE( almostEqual(rcoord0.dd_MIC(rcoord1), 0.) );
         REQUIRE( rcoord0 == rcoord1 );
         REQUIRE( almostEqual(scoord0.dd_MIC(scoord1), 0.) );
         REQUIRE( scoord0 == scoord1 );
+        REQUIRE( scoord0.getBasis() == 's' );
+        REQUIRE( rcoord0.getBasis() == 'r' );
     }
 }
