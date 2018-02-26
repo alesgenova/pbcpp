@@ -7,3 +7,11 @@
 molecules and materials under periodic boundary conditions (PBC).
 
 This is a partial conversion of my Python package `PbcPy`, which can be found on [Gitlab](https://gitlab.com/ales.genova/pbcpy/) or [GitHub](https://github.com/alesgenova/pbcpy) (mirror).
+
+## Tools used:
+
+- Language: `C++14`
+- Matrices/Vectors: `Eigen`
+- Build: `cmake`
+- Unit Tests: `catch2`
+- CI/CD: `gitlab-ci`

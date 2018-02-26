@@ -50,3 +50,19 @@ TEST_CASE( "Coord Basic Tests" ) {
     REQUIRE( rcoord0.getBasis() == 'r' );
   }
 }
+
+TEST_CASE( "Coord Distance Tests" ) {
+  double a, b, c;
+  DirectCell cell0;
+  Eigen::Vector3d pos0;
+  Coord rcoord0, rcoord1, scoord0, scoord1;
+
+  a = 9. ; b = 12.; c = 18.;
+  cell0 = getOrthoDirectCell(a,b,c);
+  pos0 << 0.5, 0.0, 1.0;
+  scoord0 = Coord(pos0, cell0, 's');
+  pos0 << 0.6, -1.0, 3.0;
+  scoord1 = Coord(pos0, cell0, 's');
+  REQUIRE( almostEqual(scoord0.dd_MIC(scoord1), 0.9 ) );
+
+}

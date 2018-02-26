@@ -3,7 +3,7 @@
 #include "Utils.hpp"
 
 bool almostEqual(double a, double b, double thr){
-  return abs(a-b) < thr;
+  return (std::abs(a-b) < thr);
 }
 
 double randomBetween(double start, double stop){
