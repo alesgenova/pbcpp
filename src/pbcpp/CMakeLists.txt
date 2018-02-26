@@ -7,14 +7,14 @@ add_library(
     utils/Utils.cpp
     constants/Constants.hpp
     constants/Constants.cpp
-    base/BaseCell.hpp
-    base/BaseCell.cpp
-    base/DirectCell.hpp
-    base/DirectCell.cpp
-    base/ReciprocalCell.hpp
-    base/ReciprocalCell.cpp
-    base/Coord.hpp
-    base/Coord.cpp
+    cell/BaseCell.hpp
+    cell/BaseCell.cpp
+    cell/DirectCell.hpp
+    cell/DirectCell.cpp
+    cell/ReciprocalCell.hpp
+    cell/ReciprocalCell.cpp
+    coord/Coord.hpp
+    coord/Coord.cpp
 )
 
 target_include_directories (pbcpp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -12,8 +12,8 @@ class DirectCell : public BaseCell {
 
   public:
     // Constructors
-    DirectCell();
-    DirectCell(Eigen::Matrix3d lattice);
+    DirectCell(Eigen::Matrix3d lattice=Eigen::Matrix3d::Identity(),
+               Eigen::Vector3i shape=Eigen::Vector3i::Ones());
     // Returns the ReciprocalCell of a DirectCell
     ReciprocalCell getReciprocal() const;
     // compare operators

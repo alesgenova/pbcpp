@@ -2,7 +2,7 @@
 #include <cmath>
 
 #include "Coord.hpp"
-#include "DirectCell.hpp"
+#include "cell/DirectCell.hpp"
 #include "utils/Utils.hpp"
 
 

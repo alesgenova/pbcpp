@@ -2,7 +2,7 @@
 #define PBCPP_BASE_COORD
 
 #include <Eigen/Core>
-#include "DirectCell.hpp"
+#include "cell/DirectCell.hpp"
 
 class Coord{
 

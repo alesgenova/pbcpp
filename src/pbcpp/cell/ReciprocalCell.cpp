@@ -3,12 +3,11 @@
 #include "BaseCell.hpp"
 #include "DirectCell.hpp"
 #include "ReciprocalCell.hpp"
-#include "../constants/Constants.hpp"
+#include "constants/Constants.hpp"
 
 
-ReciprocalCell::ReciprocalCell() : BaseCell() {}
-
-ReciprocalCell::ReciprocalCell(Eigen::Matrix3d t_lattice) : BaseCell(t_lattice) {}
+ReciprocalCell::ReciprocalCell(Eigen::Matrix3d t_lattice, Eigen::Vector3i t_shape) 
+  : BaseCell(t_lattice, t_shape) {}
 
 bool ReciprocalCell::operator==(const ReciprocalCell & other) const{
   return BaseCell::isEqual(other);
@@ -21,5 +20,5 @@ bool ReciprocalCell::operator!=(const ReciprocalCell & other) const{
 DirectCell ReciprocalCell::getDirect() const{
   Eigen::Matrix3d at;
   at = TWOPI*lattice.inverse();
-  return DirectCell(at);
+  return DirectCell(at, shape);
 }

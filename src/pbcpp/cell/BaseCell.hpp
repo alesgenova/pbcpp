@@ -6,14 +6,16 @@
 class BaseCell{
 
   public:
-    // default constructor
-    BaseCell();
     // constructor
-    BaseCell(Eigen::Matrix3d lattice);
+    BaseCell(Eigen::Matrix3d lattice=Eigen::Matrix3d::Identity(),
+             Eigen::Vector3i shape=Eigen::Vector3i::Ones());
     // destructor: BaseCell is an abstract class
     virtual ~BaseCell() = 0;
     // returns the volume of the cell
     double getVolume() const;
+    double getDv() const;
+    Eigen::Vector3i getShape() const;
+    int getNnr() const;
     // returns the lattice of the cell
     Eigen::Matrix3d getLattice() const;
     // compare the cell to another and determine if they are equivalent
@@ -25,6 +27,12 @@ class BaseCell{
     bool isEqual(const BaseCell& other) const;
     // the volume
     double volume;
+    // the number of points along each direction
+    Eigen::Vector3i shape;
+    // the total number of points in the grid
+    int nnr;
+    // the volume size of each point on the grid
+    double dv;
 
 };
 
